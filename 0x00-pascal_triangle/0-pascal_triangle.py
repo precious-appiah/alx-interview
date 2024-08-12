@@ -1,5 +1,9 @@
+#!/usr/bin/python3
+"""python script for pascal triangle"""
 def pascal_triangle(n):    
-    """Initialize the triangle with the first row"""
+    """function to return list of lists """
+    if n <= 0:
+        return []
     triangle = [[1]]
     
     for i in range(1, n):
