@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-
-
 """python script for pascal triangle"""
+
+
 def pascal_triangle(n):
     """function to return list of lists """
     if n <= 0:
@@ -14,5 +14,4 @@ def pascal_triangle(n):
             row.append(triangle[i-1][j-1] + triangle[i-1][j])
         row.append(1)
         triangle.append(row)
-
     return triangle
