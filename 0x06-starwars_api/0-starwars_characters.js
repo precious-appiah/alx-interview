@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-
-//extract the value 3 from it
+#!/usr/bin/node
 
 const request = require("request");
 const args = process.argv[2];
