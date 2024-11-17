@@ -1,28 +1,24 @@
-#!/usr/bin/node
+#!/usr/bin/env node
+/* prints all characters of star wars movie passed as commandline argument */
 
 const request = require('request');
-const args = process.argv[2];
 
-function movieCharacters (id) {
-  let res = [];
+const movieId = process.argv[2];
 
-  request(
-    `https://swapi-api.alx-tools.com/api/films/${id}`,
-    { json: true },
-    function (error, response, body) {
-      if (error) return error;
-      res = body.characters;
+const url = `https://swapi-api.hbtn.io/api/films/${movieId}`;
 
-      // loop through the array
-      // make an api call
-      // get the name of every object
-      res.map((item) => {
-        return request(item, { json: true }, (error, response, body) => {
-          if (error) return error;
-          console.log(body.name);
-        });
+request(url, async (err, res, body) => {
+  err && console.log(err);
+
+  const charactersArray = (JSON.parse(res.body).characters);
+  for (const character of charactersArray) {
+    await new Promise((resolve, reject) => {
+      request(character, (err, res, body) => {
+        err && console.log(err);
+
+        console.log(JSON.parse(body).name);
+        resolve();
       });
-    }
-  );
-}
-movieCharacters(args);
+    });
+  }
+});
